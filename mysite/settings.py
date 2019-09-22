@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$^b_#&ln7sm@b_d37m$l3)j6y&bipyncu1zqoxz&6g#o*hf-&6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
@@ -120,3 +120,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# Sending emails
+# EMAIL_HOST ='smtp.gmail/com'
+# EMAIL_HOST_USER = 'retipdjango@gmail.com'
+# EMAIL_HOST_PASSWORD = 'djangoretip123'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+EMAIL_HOST ='smtp.wp.pl'
+EMAIL_HOST_USER = 'retip1994@wp.pl'
+EMAIL_HOST_PASSWORD = 'szynka1'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
