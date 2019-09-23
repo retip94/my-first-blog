@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -11,4 +11,9 @@ class EmailPostForm(forms.Form):
     email = forms.EmailField()
     to = forms.EmailField()
     comment = forms.CharField(required=False, widget=forms.Textarea)
+
+class CommentPostForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'text')
 
