@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
@@ -11,6 +12,7 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
+    tags = TaggableManager()
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk':self.pk})
 

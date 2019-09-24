@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
+{% block title %}{{post.title}}{% endblock %}
 
 {% block content %}
-    <div class="post">
         {% if post.published_date %}
         <div class="date">
             {{ post.published_date}}
@@ -17,28 +17,32 @@
                 Share this post
             </a>
         </p>
-        <div class="comments">
-            {% with comments.count as total_comments %}
-                <h2>
-                    {{ total_comments}} comment{{total_comments|pluralize}}
-                </h2>
-            {% endwith %}
-            <form method="post">
+        {% with comments.count as total_comments %}
+            <h2>
+                {{ total_comments}} comment{{total_comments|pluralize}}
+            </h2>
+        {% endwith %}
+
+        {% for comment in comments %}
+            <div class="comment">
+                <p class="info">
+                    Comment {{ forloop.counter}} by {{comment.name}}
+                    {{comment.created}}
+                </p>
+                {{comment.text|linebreaks}}
+            </div>
+        {% empty %}
+            <p>There are no comments yet</p>
+        {% endfor %}
+        {% if new_comment %}
+            <h2>Your comment has been added.</h2>
+        {% else %}
+        <form action="." method="post">
                 {{comment_form.as_p}}
                 {% csrf_token %}
-                <input type="submit" value="Post a comment">
-            </form>
-            {% for comment in comments %}
-                <div class="comment">
-                    <p class="info">
-                        Comment {{ forloop.counter}} by {{comment.name}} {{comment.created}}
-                    </p>
-                    {{comment.body|linebreaks}}
-                </div>
-                {% empty %}}
-                <p>There are no comments yet</p>
-            {% endfor %}
-        </div>
-    </div>
+                <p><input type="submit" value="Post a comment"></p>
+        </form>
+        {% endif %}
+
 
 {% endblock %}
